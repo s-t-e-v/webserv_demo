@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Root Location - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🗂️</div>
+                <h1>Local Root Location</h1>
+            </div>
+            <p class="subtitle">Custom root directive demonstration</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>✅ Custom Root Directory Working!</h2>
+            <p>This page demonstrates that the server correctly uses a custom root directory for the <code>/local_root/</code> location.</p>
+        </section>
+
+        <section class="features">
+            <h3>Root Directive Test Results</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <span>You requested: GET /local_root/</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📁</span>
+                    <span>Custom root: /local_root/ directory</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <span>Server looked for: index.html in custom root</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📄</span>
+                    <span>Served: /local_root/index.html</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span>Status: 200 OK</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚙️</span>
+                    <span>Root directive: Working correctly</span>
+                </div>
+            </div>
+        </section>
+
+        <div style="background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 16px; margin: 40px 0; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
+            <h3 style="color: #667eea; margin-bottom: 15px;">📋 Configuration Note</h3>
+            <p style="margin: 0; color: #666; font-style: italic;">
+                This location uses a different root directory than the default server root. 
+                The server configuration should have a <code>root</code> directive that maps 
+                <code>/local_root/</code> requests to a specific directory on the filesystem.
+            </p>
+        </div>
+
+        <section class="back-navigation" style="text-align: center;">
+            <a href="/demo/get.html" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to GET Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Root directive test.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/demo/get.html">GET Tests</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

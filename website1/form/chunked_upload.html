@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chunked Transfer Encoding Guide - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .guide-container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+        }
+        .method-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .method-section:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+        .method-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .method-icon {
+            font-size: 2.5rem;
+        }
+        .method-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin: 0;
+        }
+        .method-subtitle {
+            color: #666;
+            margin: 5px 0 0 0;
+            font-size: 1rem;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            position: relative;
+        }
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .highlight {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .step-list {
+            counter-reset: step-counter;
+            padding-left: 0;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            list-style: none;
+            position: relative;
+            padding-left: 60px;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📚</div>
+                <h1>Chunked Transfer Encoding Guide</h1>
+            </div>
+            <p class="subtitle">Learn how to test chunked requests with real HTTP tools</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>How to Test Chunked Transfer Encoding</h2>
+            <p>Browsers don't support manual Transfer-Encoding headers from JavaScript. Here's how to test chunked requests properly using various tools.</p>
+        </section>
+
+        <div class="warning-box">
+            <strong>⚠️ Important:</strong> JavaScript fetch() in browsers automatically sets Content-Length and ignores Transfer-Encoding: chunked. Use the tools below for real chunked testing.
+        </div>
+
+        <!-- CURL Method -->
+        <div class="guide-container">
+            <div class="method-section">
+                <div class="method-header">
+                    <div class="method-icon">🌀</div>
+                    <div>
+                        <h3 class="method-title">cURL</h3>
+                        <p class="method-subtitle">Command-line HTTP client (recommended)</p>
+                    </div>
+                </div>
+
+                <p>The easiest way to test chunked transfer encoding. cURL automatically handles chunked encoding when you pipe data or use specific flags.</p>
+
+                <h4>Method 1: Auto-chunked with pipe</h4>
+                <div class="code-block" data-lang="bash">echo "Hello World! This is chunked data." | curl -X POST \
+  -H "Content-Type: text/plain" \
+  -H "Transfer-Encoding: chunked" \
+  --data-binary @- \
+  http://localhost:8080/uploads/chunked-test.txt</div>
+
+                <h4>Method 2: Manual chunked body</h4>
+                <div class="code-block" data-lang="bash"># Create a file with chunked format
+echo -e "d\r\nHello World!\r\n0\r\n\r\n" | curl -X POST \
+  -H "Content-Type: text/plain" \
+  -H "Transfer-Encoding: chunked" \
+  --data-binary @- \
+  http://localhost:8080/uploads/manual-chunked.txt</div>
+
+                <h4>Method 3: From file with chunked encoding</h4>
+                <div class="code-block" data-lang="bash"># First create your data file
+echo "This is my test content for chunked transfer" > test-data.txt
+
+# Send it chunked
+curl -X POST \
+  -H "Content-Type: text/plain" \
+  -H "Transfer-Encoding: chunked" \
+  --data-binary @test-data.txt \
+  http://localhost:8080/uploads/file-chunked.txt</div>
+
+                <div class="success-box">
+                    <strong>✅ Why cURL works:</strong> cURL properly implements HTTP/1.1 and will send real Transfer-Encoding: chunked headers when specified.
+                </div>
+            </div>
+        </div>
+
+        <!-- Telnet Method -->
+        <div class="guide-container">
+            <div class="method-section">
+                <div class="method-header">
+                    <div class="method-icon">💻</div>
+                    <div>
+                        <h3 class="method-title">Telnet</h3>
+                        <p class="method-subtitle">Raw HTTP connection (educational)</p>
+                    </div>
+                </div>
+
+                <p>For understanding the raw HTTP protocol. You manually craft the entire HTTP request.</p>
+
+                <ol class="step-list">
+                    <li>Connect to your server: <code>telnet localhost 8080</code></li>
+                    <li>Type the HTTP request manually (press Enter after each line)</li>
+                    <li>Use <code>Ctrl+]</code> then <code>quit</code> to exit</li>
+                </ol>
+
+                <h4>Example Raw HTTP Request:</h4>
+                <div class="code-block" data-lang="http">POST /uploads/telnet-chunked.txt HTTP/1.1
+Host: localhost:8080
+Content-Type: text/plain
+Transfer-Encoding: chunked
+
+1a
+This is the first chunk!
+12
+Second chunk here.
+0
+
+</div>
+
+                <div class="info-box">
+                    <strong>💡 Hex explanation:</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li><code>1a</code> = 26 bytes (length of "This is the first chunk!")</li>
+                        <li><code>12</code> = 18 bytes (length of "Second chunk here.")</li>
+                        <li><code>0</code> = End of chunks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Postman Method -->
+        <div class="guide-container">
+            <div class="method-section">
+                <div class="method-header">
+                    <div class="method-icon">📮</div>
+                    <div>
+                        <h3 class="method-title">Postman</h3>
+                        <p class="method-subtitle">GUI HTTP client</p>
+                    </div>
+                </div>
+
+                <p>Postman can send chunked requests, but requires manual setup.</p>
+
+                <ol class="step-list">
+                    <li>Open Postman and create a new POST request</li>
+                    <li>Set URL to: <code>http://localhost:8080/uploads/postman-chunked.txt</code></li>
+                    <li>In Headers tab, add: <code>Transfer-Encoding: chunked</code></li>
+                    <li>In Headers tab, add: <code>Content-Type: text/plain</code></li>
+                    <li>In Body tab, select "raw" and enter your chunked data</li>
+                    <li>Click Send</li>
+                </ol>
+
+                <h4>Body format for Postman:</h4>
+                <div class="code-block" data-lang="http">1f
+Hello from Postman chunked!
+0
+
+</div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Note:</strong> Some versions of Postman might override chunked encoding. Use cURL if Postman doesn't work as expected.
+                </div>
+            </div>
+        </div>
+
+        <!-- Thunder Client Method -->
+        <div class="guide-container">
+            <div class="method-section">
+                <div class="method-header">
+                    <div class="method-icon">⚡</div>
+                    <div>
+                        <h3 class="method-title">Thunder Client (VS Code)</h3>
+                        <p class="method-subtitle">VS Code extension</p>
+                    </div>
+                </div>
+
+                <p>Thunder Client extension for VS Code. Similar to Postman but integrated in your editor.</p>
+
+                <ol class="step-list">
+                    <li>Install Thunder Client extension in VS Code</li>
+                    <li>Open Thunder Client panel (sidebar icon)</li>
+                    <li>Create new request: POST <code>http://localhost:8080/uploads/thunder-chunked.txt</code></li>
+                    <li>Add headers:
+                        <ul style="margin: 5px 0 0 20px;">
+                            <li><code>Transfer-Encoding: chunked</code></li>
+                            <li><code>Content-Type: text/plain</code></li>
+                        </ul>
+                    </li>
+                    <li>Set body to raw text with chunked format</li>
+                    <li>Send request</li>
+                </ol>
+
+                <h4>Example chunked body:</h4>
+                <div class="code-block" data-lang="http">20
+Thunder Client chunked test!
+0
+
+</div>
+            </div>
+        </div>
+
+        <!-- Understanding Chunked Format -->
+        <div class="guide-container">
+            <div class="method-section">
+                <div class="method-header">
+                    <div class="method-icon">🔍</div>
+                    <div>
+                        <h3 class="method-title">Understanding the Format</h3>
+                        <p class="method-subtitle">How chunked encoding works</p>
+                    </div>
+                </div>
+
+                <p>Chunked transfer encoding follows this pattern:</p>
+
+                <div class="code-block" data-lang="format">[chunk-size in hex]\r\n
+[chunk-data]\r\n
+[chunk-size in hex]\r\n
+[chunk-data]\r\n
+0\r\n
+\r\n</div>
+
+                <h4>Real example breakdown:</h4>
+                <div class="code-block" data-lang="http">POST /uploads/example.txt HTTP/1.1
+Host: localhost:8080
+Transfer-Encoding: chunked
+Content-Type: text/plain
+
+<span class="highlight">7</span>      ← 7 bytes in hex
+<span class="highlight">Mozilla</span> ← 7 bytes of data
+<span class="highlight">9</span>      ← 9 bytes in hex  
+<span class="highlight">Developer</span> ← 9 bytes of data
+<span class="highlight">0</span>      ← End marker
+
+     ← Final empty line</div>
+
+                <div class="info-box">
+                    <strong>💡 Key points:</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Chunk sizes are in <strong>hexadecimal</strong></li>
+                        <li>Each line ends with <code>\r\n</code> (CRLF)</li>
+                        <li>Final chunk size is <code>0</code></li>
+                        <li>Request ends with empty line</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="back-navigation" style="text-align: center; margin-top: 40px;">
+            <a href="/demo/post.html" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to POST Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Chunked transfer encoding guide.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

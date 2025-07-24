@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Redirect Demo - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🔄</div>
+                <h1>HTTP Redirect Demo</h1>
+            </div>
+            <p class="subtitle">Test various HTTP redirection methods and status codes</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Test HTTP Redirection Functionality</h2>
+            <p>Explore different types of HTTP redirects including permanent, temporary, and CGI-based redirections</p>
+        </section>
+
+        <!-- Server-Based Redirects Section -->
+        <div class="section-header" style="margin: 40px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">
+            <h3 style="color: #333; font-size: 1.5rem; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 10px;">
+                <span>🌐</span>
+                Server-Based Redirects
+            </h3>
+        </div>
+
+        <section class="demo-list">
+            <a href="/redir301/" class="demo-list-item">
+                <div class="list-item-icon">🔗</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        301 Permanent Redirect
+                        <span class="list-item-badge" style="background: rgba(40, 167, 69, 0.1); color: #155724;">301</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test permanent redirection (301 Moved Permanently). Search engines will update their indexes to the new URL.
+                    </p>
+                    <code class="list-item-url">GET /redir301 → 301 /redir_fallback/redir301.html</code>
+                </div>
+            </a>
+
+            <a href="/redir302/" class="demo-list-item">
+                <div class="list-item-icon">🔄</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        302 Temporary Redirect
+                        <span class="list-item-badge" style="background: rgba(255, 193, 7, 0.1); color: #856404;">302</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test temporary redirection (302 Found). The original URL should continue to be used for future requests.
+                    </p>
+                    <code class="list-item-url">GET /redir302 → 302 /redir_fallback/redir302.html</code>
+                </div>
+            </a>
+        </section>
+
+        <!-- CGI Redirects Reference -->
+        <div class="section-header" style="margin: 40px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #e9ecef;">
+            <h3 style="color: #333; font-size: 1.5rem; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 10px;">
+                <span>⚙️</span>
+                CGI-Based Redirects
+            </h3>
+        </div>
+
+        <section class="demo-list">
+            <a href="/demo/cgi.html" class="demo-list-item">
+                <div class="list-item-icon">⚙️</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        CGI Script Redirections
+                        <span class="list-item-badge" style="background: rgba(102, 126, 234, 0.1); color: #4c63d2;">CGI</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Comprehensive CGI redirection testing including client redirects, local redirects, and query parameter handling.
+                    </p>
+                    <code class="list-item-url">Visit /demo/cgi.html for CGI redirect demos</code>
+                </div>
+            </a>
+        </section>
+
+        <section class="features">
+            <h3>Redirect Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🔗</span>
+                    <span>301 Permanent Redirect</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔄</span>
+                    <span>302 Temporary Redirect</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌐</span>
+                    <span>Server-Based Redirects</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚙️</span>
+                    <span>CGI Script Redirects</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="back-navigation" style="text-align: center;">
+            <a href="/" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to Main Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Testing HTTP redirection functionality.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+                <a href="/status">Server Status</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

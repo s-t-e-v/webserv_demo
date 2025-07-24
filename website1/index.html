@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webserv Demo - HTTP Server Testing Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🚀</div>
+                <h1>Webserv</h1>
+            </div>
+            <p class="subtitle">HTTP Server Testing & Demonstration Platform</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Test Our HTTP Server Implementation</h2>
+            <p>Explore different HTTP methods and server capabilities through interactive demonstrations</p>
+        </section>
+
+        <section class="demo-grid">
+            <a href="/demo/get.html" class="demo-card get-card">
+                <div class="card-icon">📄</div>
+                <h3>GET Request</h3>
+                <p>Test file serving, static content delivery, and basic HTTP GET functionality</p>
+                <div class="method-badge get">GET</div>
+            </a>
+
+            <a href="/demo/post.html" class="demo-card post-card">
+                <div class="card-icon">📝</div>
+                <h3>POST Request</h3>
+                <p>Demonstrate form submission, data processing, and HTTP POST handling</p>
+                <div class="method-badge post">POST</div>
+            </a>
+
+            <a href="/demo/delete.html" class="demo-card delete-card">
+                <div class="card-icon">🗑️</div>
+                <h3>DELETE Request</h3>
+                <p>Show resource deletion capabilities and HTTP DELETE method implementation</p>
+                <div class="method-badge delete">DELETE</div>
+            </a>
+
+            <a href="/demo/cgi.html" class="demo-card cgi-card">
+                <div class="card-icon">⚙️</div>
+                <h3>CGI Scripts</h3>
+                <p>Execute server-side scripts, dynamic content generation, and CGI processing</p>
+                <div class="method-badge cgi">CGI</div>
+            </a>
+
+            <a href="/demo/not_allowed.html" class="demo-card error-card">
+                <div class="card-icon">🚫</div>
+                <h3>405 Method Not Allowed</h3>
+                <p>Test error handling and HTTP 405 status code responses</p>
+                <div class="method-badge error">405</div>
+            </a>
+
+            <a href="/demo/redirect.html" class="demo-card special-card">
+                <div class="card-icon">🔄</div>
+                <h3>HTTP Redirects</h3>
+                <p>Test various HTTP redirection types and status codes (301, 302, CGI redirects)</p>
+                <div class="method-badge special">REDIRECT</div>
+            </a>
+        
+            <a href="/demo/cookies.html" class="demo-card special-card">
+                <div class="card-icon">🍪</div>
+                <h3>Cookie Demo</h3>
+                <p>Test HTTP cookie setting, reading, and session management capabilities</p>
+                <div class="method-badge special">COOKIES</div>
+            </a>
+
+        </section>
+
+        <section class="features">
+            <h3>Server Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <span>High Performance</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔧</span>
+                    <span>CGI Support</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📁</span>
+                    <span>File Upload/Download</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🛡️</span>
+                    <span>Error Handling</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌐</span>
+                    <span>HTTP/1.1 Compliant</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔄</span>
+                    <span>Keep-Alive Support</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🍪</span>
+                    <span>Cookie Management</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📦</span>
+                    <span>Chunked Transfer</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🗂️</span>
+                    <span>Directory Listing</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Built with C++ and modern web standards.</p>
+            <div class="footer-links">
+                <a href="https://github.com/your-repo/webserv" target="_blank">GitHub</a>
+                <a href="/uploads/">View Uploads</a>
+                <a href="/status">Server Status</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

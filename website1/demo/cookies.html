@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Demo - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🍪</div>
+                <h1>Cookie Demo</h1>
+            </div>
+            <p class="subtitle">Test HTTP cookie functionality and session management</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Test Cookie & Session Management</h2>
+            <p>Demonstrate cookie-based authentication and session handling</p>
+        </section>
+
+        <section class="demo-list">
+            <a href="/cgi/login.py" class="demo-list-item">
+                <div class="list-item-icon">🔐</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Login System (Python)
+                        <span class="list-item-badge" style="background: rgba(55, 118, 171, 0.1); color: #3776ab;">PYTHON</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test cookie-based login system implemented in Python. Demonstrates session creation and management.
+                    </p>
+                    <code class="list-item-url">GET /cgi/login.py</code>
+                </div>
+            </a>
+
+            <a href="/cgi/login.php" class="demo-list-item">
+                <div class="list-item-icon">🔐</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Login System (PHP)
+                        <span class="list-item-badge" style="background: rgba(102, 51, 153, 0.1); color: #663399;">PHP</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test cookie-based login system implemented in PHP. Shows session handling via PHP sessions.
+                    </p>
+                    <code class="list-item-url">GET /cgi/login.php</code>
+                </div>
+            </a>
+        </section>
+
+        <section class="features">
+            <h3>Cookie & Session Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🍪</span>
+                    <span>Cookie Setting</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📖</span>
+                    <span>Cookie Reading</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔐</span>
+                    <span>Session Management</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🛡️</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🚪</span>
+                    <span>Login/Logout</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⏰</span>
+                    <span>Session Expiry</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="back-navigation" style="text-align: center;">
+            <a href="/" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to Main Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Cookie and session functionality test.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+                <a href="/status">Server Status</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single File Upload - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .upload-zone {
+            border: 3px dashed #ddd;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        .upload-zone input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-preview {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            display: none;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .file-icon {
+            font-size: 2rem;
+        }
+        .file-details h4 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .file-meta {
+            color: #666;
+            font-size: 14px;
+        }
+        .file-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+        .remove-file {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .remove-file:hover {
+            background: #c82333;
+        }
+        .status-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .upload-progress {
+            display: none;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 6px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📄</div>
+                <h1>Single File Upload</h1>
+            </div>
+            <p class="subtitle">Upload a single file with async feedback</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Upload Single File via POST with JavaScript</h2>
+            <p>Test single file upload functionality with drag & drop and real-time feedback</p>
+        </section>
+
+        <section style="max-width: 600px; margin: 0 auto;">
+            <form id="uploadForm" style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
+
+                <div class="upload-zone" id="uploadZone">
+                    <div style="pointer-events: none;">
+                        <div style="font-size: 4rem; margin-bottom: 20px; color: #ccc;">📁</div>
+                        <h3 style="margin: 0 0 10px 0; color: #333;">Choose a file or drag it here</h3>
+                        <p style="margin: 0; color: #666;">Supports all file types</p>
+                    </div>
+                    <input type="file" id="fileInput" name="file" required>
+                </div>
+
+                <div class="file-preview" id="filePreview">
+                    <div class="file-info">
+                        <span class="file-icon">📄</span>
+                        <div class="file-details">
+                            <h4 id="fileName"></h4>
+                            <div class="file-meta">
+                                <span id="fileSize"></span> • <span id="fileType"></span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button type="button" class="remove-file" onclick="removeFile()">Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upload-progress" id="uploadProgress">
+                    <div class="progress-header">
+                        <span id="progressFileName">Uploading...</span>
+                        <span id="progressStatus">⏳ Preparing</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn" disabled style="width: 100%; padding: 15px; background: #ccc; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: not-allowed; transition: all 0.3s ease; margin-top: 30px;">
+                    Select a file to upload
+                </button>
+
+                <div id="statusMessage"></div>
+                <div id="fileActions" style="display: none;">
+                    <div class="action-buttons">
+                        <a href="/uploads/" class="action-btn btn-primary" target="_blank">
+                            📁 View Uploads Directory
+                        </a>
+                        <button type="button" onclick="resetForm()" class="action-btn btn-secondary">
+                            🔄 Upload Another File
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="back-navigation" style="text-align: center; margin-top: 40px;">
+            <a href="/demo/post.html" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to POST Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Single file upload with async feedback.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const fileType = document.getElementById('fileType');
+        const submitBtn = document.getElementById('submitBtn');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressFileName = document.getElementById('progressFileName');
+        const progressStatus = document.getElementById('progressStatus');
+        const progressFill = document.getElementById('progressFill');
+        const statusMessage = document.getElementById('statusMessage');
+        const fileActions = document.getElementById('fileActions');
+        
+        let selectedFile = null;
+
+        // File input change handler
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                selectedFile = this.files[0];
+                displayFile(selectedFile);
+            }
+        });
+
+        // Drag and drop handlers
+        uploadZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length > 0) {
+                selectedFile = e.dataTransfer.files[0];
+                
+                // Update file input
+                const dt = new DataTransfer();
+                dt.items.add(selectedFile);
+                fileInput.files = dt.files;
+                
+                displayFile(selectedFile);
+            }
+        });
+
+        // Form submission with async upload
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!selectedFile) {
+                showStatus('Please select a file to upload.', 'error');
+                return;
+            }
+            
+            // Show progress and hide other elements
+            uploadProgress.style.display = 'block';
+            fileActions.style.display = 'none';
+            statusMessage.innerHTML = '';
+            
+            // Update UI
+            progressFileName.textContent = `Uploading: ${selectedFile.name}`;
+            progressStatus.textContent = '⏳ Preparing';
+            progressFill.style.width = '0%';
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '⏳ Uploading...';
+            submitBtn.style.background = '#ccc';
+            
+            try {
+                // Update progress
+                progressStatus.textContent = '📤 Uploading';
+                progressFill.style.width = '50%';
+                
+                // Create FormData for multipart upload
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+                
+                const response = await fetch('/uploads/', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                // Complete progress
+                progressFill.style.width = '100%';
+                
+                if (response.ok) {
+                    progressStatus.textContent = '✅ Success';
+                    showStatus(`✅ File "${selectedFile.name}" uploaded successfully!`, 'success');
+                    fileActions.style.display = 'block';
+                    
+                    // Hide file preview after successful upload
+                    setTimeout(() => {
+                        filePreview.style.display = 'none';
+                        uploadProgress.style.display = 'none';
+                    }, 2000);
+                    
+                } else {
+                    progressStatus.textContent = `❌ Failed (${response.status})`;
+                    progressFill.style.background = '#dc3545';
+                    showStatus(`❌ Upload failed: HTTP ${response.status} - ${response.statusText}`, 'error');
+                }
+                
+            } catch (error) {
+                progressStatus.textContent = '❌ Network Error';
+                progressFill.style.background = '#dc3545';
+                showStatus(`❌ Network error: ${error.message}`, 'error');
+            } finally {
+                // Reset submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '📤 Upload File';
+                submitBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            }
+        });
+
+        function displayFile(file) {
+            fileName.textContent = file.name;
+            fileSize.textContent = (file.size / 1024).toFixed(2) + ' KB';
+            fileType.textContent = file.type || 'Unknown type';
+            
+            filePreview.style.display = 'block';
+            uploadProgress.style.display = 'none';
+            fileActions.style.display = 'none';
+            statusMessage.innerHTML = '';
+            
+            submitBtn.disabled = false;
+            submitBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            submitBtn.style.cursor = 'pointer';
+            submitBtn.textContent = 'Upload File';
+        }
+
+        function removeFile() {
+            selectedFile = null;
+            fileInput.value = '';
+            filePreview.style.display = 'none';
+            uploadProgress.style.display = 'none';
+            fileActions.style.display = 'none';
+            statusMessage.innerHTML = '';
+            
+            submitBtn.disabled = true;
+            submitBtn.style.background = '#ccc';
+            submitBtn.style.cursor = 'not-allowed';
+            submitBtn.textContent = 'Select a file to upload';
+        }
+
+        function showStatus(message, type) {
+            statusMessage.innerHTML = `<div class="status-message status-${type}">${message}</div>`;
+        }
+        
+        function resetForm() {
+            removeFile();
+        }
+    </script>
+</body>
+</html>

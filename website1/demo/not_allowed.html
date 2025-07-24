@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>405 Method Not Allowed Demo - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🚫</div>
+                <h1>405 Method Not Allowed Demo</h1>
+            </div>
+            <p class="subtitle">Test HTTP 405 error handling and method restrictions</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Test 405 Method Not Allowed</h2>
+            <p>Explore how the server responds when HTTP methods are not allowed for specific routes</p>
+        </section>
+
+        <section class="demo-list">
+            <a href="/get_not_allowed/" class="demo-list-item">
+                <div class="list-item-icon">🚫</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        GET Not Allowed
+                        <span class="list-item-badge error">405</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test a route where GET method is not allowed. Should return HTTP 405 status code.
+                    </p>
+                    <code class="list-item-url">GET /get_not_allowed/</code>
+                </div>
+            </a>
+
+            <div class="demo-list-item" style="pointer-events: none; opacity: 0.8; cursor: default;">
+                <div class="list-item-icon">🛠️</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        POST Not Allowed
+                        <span class="list-item-badge error">405</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Use curl or an API client to test POST requests to routes that don't allow POST method.
+                    </p>
+                    <code class="list-item-url">curl -X POST http://127.0.0.1:3000/post_not_allowed/</code>
+                </div>
+            </div>
+
+            <div class="demo-list-item" style="pointer-events: none; opacity: 0.8; cursor: default;">
+                <div class="list-item-icon">🛠️</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        DELETE Not Allowed
+                        <span class="list-item-badge error">405</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Use curl or an API client to test DELETE requests to routes that don't allow DELETE method.
+                    </p>
+                    <code class="list-item-url">curl -X DELETE http://127.0.0.1:3000/delete_not_allowed/</code>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h3>405 Error Testing</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🚫</span>
+                    <span>Method Restrictions</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🛡️</span>
+                    <span>Security Enforcement</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📋</span>
+                    <span>Proper Status Codes</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <span>Allow Header</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚠️</span>
+                    <span>Error Pages</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <span>HTTP Compliance</span>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 16px; margin: 40px 0; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
+            <h3 style="color: #dc3545; margin-bottom: 20px;">💡 How to Test</h3>
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: #333; margin-bottom: 10px;">Using curl:</h4>
+                <div style="background: #2d3748; color: #e2e8f0; padding: 15px; border-radius: 8px; font-family: monospace; margin-bottom: 15px;">
+                    <div style="color: #68d391;">curl -X POST http://127.0.0.1:3000/post_not_allowed/</div>
+                    <div style="color: #68d391;">curl -X DELETE http://127.0.0.1:3000/delete_not_allowed/</div>
+                </div>
+            </div>
+            <div>
+                <h4 style="color: #333; margin-bottom: 10px;">Expected Response:</h4>
+                <div style="background: #2d3748; color: #e2e8f0; padding: 15px; border-radius: 8px; font-family: monospace;">
+                    <div style="color: #f56565;">HTTP/1.1 405 Method Not Allowed</div>
+                    <div style="color: #63b3ed;">Allow: GET</div>
+                    <div style="color: #68d391;">Content-Type: text/html</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="back-navigation" style="text-align: center;">
+            <a href="/" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to Main Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Testing 405 Method Not Allowed responses.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+                <a href="/status">Server Status</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

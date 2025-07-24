@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GET Request Demo - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📄</div>
+                <h1>GET Request Demo</h1>
+            </div>
+            <p class="subtitle">Test static file serving and directory browsing capabilities</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Test GET Request Functionality</h2>
+            <p>Explore different types of GET requests and how our server handles file serving and directory listing</p>
+        </section>
+
+        <section class="demo-list">
+            <a href="/index/" class="demo-list-item">
+                <div class="list-item-icon">🏠</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Index Location
+                        <span class="list-item-badge get">INDEX</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test automatic index file serving. The server will look for and serve index.html files from the directory.
+                    </p>
+                    <code class="list-item-url">GET /index/</code>
+                </div>
+            </a>
+
+            <a href="/autoindex/" class="demo-list-item">
+                <div class="list-item-icon">📂</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Autoindex Location
+                        <span class="list-item-badge special">AUTOINDEX</span>
+                    </h3>
+                    <p class="list-item-description">
+                        View automatic directory listing when no index file is present. Shows all files and subdirectories.
+                    </p>
+                    <code class="list-item-url">GET /autoindex/</code>
+                </div>
+            </a>
+
+            <a href="/local_root/" class="demo-list-item">
+                <div class="list-item-icon">🗂️</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Root Directive Location
+                        <span class="list-item-badge cgi">ROOT</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test custom root directory configuration. Files are served from a different root path than the default.
+                    </p>
+                    <code class="list-item-url">GET /local_root/</code>
+                </div>
+            </a>
+        </section>
+
+        <section class="features">
+            <h3>GET Request Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">📋</span>
+                    <span>Index File Serving</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📁</span>
+                    <span>Directory Listing</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🗃️</span>
+                    <span>Custom Root Paths</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <span>Content-Type Detection</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <span>Static File Caching</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔗</span>
+                    <span>Symbolic Link Support</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="back-navigation" style="text-align: center;">
+            <a href="/" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to Main Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Testing GET request functionality.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+                <a href="/status">Server Status</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

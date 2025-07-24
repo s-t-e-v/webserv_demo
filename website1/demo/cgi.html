@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGI Demo - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .section-header {
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .section-title {
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .copy-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .copy-box h4 {
+            color: #667eea;
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+        .copy-box p {
+            color: #666;
+            margin: 0 0 15px 0;
+            line-height: 1.6;
+        }
+        .copy-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .copy-field {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+            background: white;
+        }
+        .copy-btn {
+            padding: 10px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .copy-btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+        .copy-btn.copied {
+            background: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">⚙️</div>
+                <h1>CGI Demo</h1>
+            </div>
+            <p class="subtitle">Test server-side script execution and dynamic content generation</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Test CGI Script Execution</h2>
+            <p>Explore server-side scripting capabilities with Python, PHP, and various request methods</p>
+        </section>
+
+        <!-- GET Section -->
+        <div class="section-header">
+            <h3 class="section-title">
+                <span>📥</span>
+                GET Requests
+            </h3>
+        </div>
+
+        <section class="demo-list">
+            <a href="/cgi/get/python_demo.py" class="demo-list-item">
+                <div class="list-item-icon">🐍</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Python CGI Script
+                        <span class="list-item-badge" style="background: rgba(255, 193, 7, 0.1); color: #856404;">PYTHON</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Execute a Python script via CGI. Demonstrates server-side Python execution and dynamic HTML generation.
+                    </p>
+                    <code class="list-item-url">GET /cgi/get/python_demo.py</code>
+                </div>
+            </a>
+
+            <a href="/cgi/get/php_demo.php" class="demo-list-item">
+                <div class="list-item-icon">🌐</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        PHP CGI Script
+                        <span class="list-item-badge" style="background: rgba(102, 51, 153, 0.1); color: #663399;">PHP</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Execute a PHP script via CGI. Shows server-side PHP processing and dynamic content creation.
+                    </p>
+                    <code class="list-item-url">GET /cgi/get/php_demo.php</code>
+                </div>
+            </a>
+        </section>
+
+        <!-- POST Section -->
+        <div class="section-header">
+            <h3 class="section-title">
+                <span>📤</span>
+                POST Requests
+            </h3>
+        </div>
+
+        <section class="demo-list">
+            <a href="/cgi/post/simple_form.php" class="demo-list-item">
+                <div class="list-item-icon">📝</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Simple Form Processing
+                        <span class="list-item-badge" style="background: rgba(40, 167, 69, 0.1); color: #155724;">FORM</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Process form data with PHP CGI. Demonstrates POST request handling and form data processing.
+                    </p>
+                    <code class="list-item-url">POST /cgi/post/simple_form.php</code>
+                </div>
+            </a>
+
+            <a href="/cgi/post/multi_upload.php" class="demo-list-item">
+                <div class="list-item-icon">📁</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Multi-File Upload
+                        <span class="list-item-badge" style="background: rgba(220, 53, 69, 0.1); color: #721c24;">UPLOAD</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Upload multiple files simultaneously. Shows multipart/form-data processing and file handling.
+                    </p>
+                    <code class="list-item-url">POST /cgi/post/multi_upload.php</code>
+                </div>
+            </a>
+        </section>
+
+        <!-- Redirection Section -->
+        <div class="section-header">
+            <h3 class="section-title">
+                <span>🔄</span>
+                Redirections
+            </h3>
+        </div>
+
+        <section class="demo-list">
+            <a href="/cgi/redir/client_redir_doc.php" class="demo-list-item">
+                <div class="list-item-icon">📋</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Client Redirect Documentation
+                        <span class="list-item-badge" style="background: rgba(13, 110, 253, 0.1); color: #0a58ca;">DOC</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Documentation and examples for client-side redirections with query parameters.
+                    </p>
+                    <code class="list-item-url">GET /cgi/redir/client_redir_doc.php</code>
+                </div>
+            </a>
+
+            <a href="/cgi/redir/client_redir.php" class="demo-list-item">
+                <div class="list-item-icon">🌐</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Client Redirect Demo
+                        <span class="list-item-badge" style="background: rgba(13, 202, 240, 0.1); color: #055160;">CLIENT</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Demonstrates client-side HTTP redirections. The server sends a redirect response to the browser.
+                    </p>
+                    <code class="list-item-url">GET /cgi/redir/client_redir.php</code>
+                </div>
+            </a>
+
+            <a href="/cgi/redir/local_redir.php" class="demo-list-item">
+                <div class="list-item-icon">🏠</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Local Redirect Demo
+                        <span class="list-item-badge" style="background: rgba(255, 193, 7, 0.1); color: #856404;">LOCAL</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Demonstrates local server-side redirections. The server processes the redirect internally.
+                    </p>
+                    <code class="list-item-url">GET /cgi/redir/local_redir.php</code>
+                </div>
+            </a>
+        </section>
+
+        <!-- Query Parameter Helper -->
+        <div class="copy-box">
+            <h4>🔗 Local Redirect with Custom Query Parameters</h4>
+            <p>
+                Copy the base URL below and add your own query parameters to test local redirections with custom data.
+                Example: <code>?redirect_to=/demo/&delay=3</code>
+            </p>
+            <div class="copy-input">
+                <input type="text" class="copy-field" value="/cgi/redir/local_redir_with_query.php?" readonly id="queryBase">
+                <button class="copy-btn" onclick="copyToClipboard()">📋 Copy</button>
+            </div>
+        </div>
+
+        <section class="features">
+            <h3>CGI Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🐍</span>
+                    <span>Python Script Execution</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌐</span>
+                    <span>PHP Script Processing</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📝</span>
+                    <span>Form Data Processing</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📁</span>
+                    <span>File Upload Handling</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔄</span>
+                    <span>HTTP Redirections</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <span>Environment Variables</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="back-navigation" style="text-align: center;">
+            <a href="/" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to Main Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Testing CGI script execution.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+                <a href="/status">Server Status</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyToClipboard() {
+            const copyField = document.getElementById('queryBase');
+            const copyBtn = document.querySelector('.copy-btn');
+            
+            copyField.select();
+            copyField.setSelectionRange(0, 99999); // For mobile devices
+            
+            navigator.clipboard.writeText(copyField.value).then(function() {
+                copyBtn.textContent = '✅ Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(function() {
+                    copyBtn.textContent = '📋 Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

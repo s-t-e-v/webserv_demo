@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POST Request Demo - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📝</div>
+                <h1>POST Request Demo</h1>
+            </div>
+            <p class="subtitle">Test form submission and data processing capabilities</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Test POST Request Functionality</h2>
+            <p>Explore different types of POST requests and how our server handles form data submission and processing</p>
+        </section>
+
+        <section class="demo-list">
+            <a href="/form/basic_post.html" class="demo-list-item">
+                <div class="list-item-icon">📋</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Basic POST Form
+                        <span class="list-item-badge post">FORM</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test basic form submission with standard HTML form elements. Submit text data using application/x-www-form-urlencoded.
+                    </p>
+                    <code class="list-item-url">GET /form/basic_post.html</code>
+                </div>
+            </a>
+
+            <a href="/form/custom_request.html" class="demo-list-item">
+                <div class="list-item-icon">⚙️</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Custom Request Builder
+                        <span class="list-item-badge cgi">CUSTOM</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Build your own POST request with custom filename, content-type, and body content. Full control over request parameters.
+                    </p>
+                    <code class="list-item-url">GET /form/custom_request.html</code>
+                </div>
+            </a>
+
+            <a href="/form/chunked_upload.html" class="demo-list-item">
+                <div class="list-item-icon">📦</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Chunked Transfer Upload
+                        <span class="list-item-badge special">CHUNKED</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Test chunked transfer encoding for large data uploads. Demonstrates how the server handles data sent in chunks.
+                    </p>
+                    <code class="list-item-url">GET /form/chunked_upload.html</code>
+                </div>
+            </a>
+
+            <a href="/form/single_file_post.html" class="demo-list-item">
+                <div class="list-item-icon">📄</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Single File POST
+                        <span class="list-item-badge post">MULTIPART</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Upload a single file using multipart/form-data encoding. Test file upload with form submission.
+                    </p>
+                    <code class="list-item-url">GET /form/single_file_post.html</code>
+                </div>
+            </a>
+
+            <a href="/form/multiple_file_post.html" class="demo-list-item">
+                <div class="list-item-icon">📂</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Multiple File POST
+                        <span class="list-item-badge special">MULTIPART</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Upload multiple files at once using multipart/form-data. Test batch file upload capabilities.
+                    </p>
+                    <code class="list-item-url">GET /form/multiple_file_post.html</code>
+                </div>
+            </a>
+        </section>
+
+        <section class="features">
+            <h3>POST Request Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">📝</span>
+                    <span>Form Data Processing</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📁</span>
+                    <span>File Upload Support</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📦</span>
+                    <span>Chunked Transfer Encoding</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🏷️</span>
+                    <span>Content-Type Handling</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <span>Request Body Parsing</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <span>CGI Script Execution</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="back-navigation" style="text-align: center;">
+            <a href="/" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to Main Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Testing POST request functionality.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+                <a href="/status">Server Status</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

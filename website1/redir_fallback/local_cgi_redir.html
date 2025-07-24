@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirection Notice - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .redirect-theme {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .redirect-card {
+            background: white;
+            border-left: 6px solid #667eea;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 20px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            max-width: 600px;
+            text-align: center;
+        }
+        .redirect-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        .redirect-title {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .redirect-message {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .redirect-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a4190);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #e74c3c, #f39c12);
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #c0392b, #e67e22);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+        @keyframes bounce {
+            0%, 20%, 60%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            80% {
+                transform: translateY(-10px);
+            }
+        }
+        .info-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .info-box p {
+            color: #666;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            .redirect-card {
+                margin: 10px;
+                padding: 30px 20px;
+            }
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .action-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body class="redirect-theme">
+    <div class="redirect-card">
+        <div class="redirect-icon">🔄</div>
+        <h1 class="redirect-title">Redirection Notice</h1>
+        <div class="redirect-badge">🌐 CGI Local Redirect</div>
+        
+        <p class="redirect-message">
+            You have been redirected by a CGI script on the Webserv server. 
+            This redirection was processed locally and handled by our custom HTTP server implementation.
+        </p>
+
+        <div class="info-box">
+            <h3>🔍 What happened?</h3>
+            <p><strong>Redirect Type:</strong> CGI Local Redirection</p>
+            <p><strong>Server:</strong> Webserv HTTP/1.1</p>
+            <p><strong>Process:</strong> CGI script executed a local redirect</p>
+            <p><strong>Status:</strong> Redirection completed successfully</p>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/" class="action-btn btn-primary">
+                🏠 Home Page
+            </a>
+            <a href="/demo/" class="action-btn btn-secondary">
+                🧪 Demo Pages
+            </a>
+        </div>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e9ecef;">
+            <p style="color: #999; font-size: 14px;">
+                &copy; 2025 Webserv Project. CGI redirection demonstration.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

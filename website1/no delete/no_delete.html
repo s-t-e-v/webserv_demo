@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Deletion Allowed</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255,255,255,0.9);
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .icon {
+            font-size: 4rem;
+            color: #e57373;
+            margin-bottom: 1rem;
+            animation: shake 0.8s infinite alternate;
+        }
+        @keyframes shake {
+            0% { transform: rotate(-5deg);}
+            100% { transform: rotate(5deg);}
+        }
+        h1 {
+            margin: 0.5rem 0;
+            color: #d32f2f;
+        }
+        p {
+            color: #555;
+            font-size: 1.2rem;
+        }
+        .btn {
+            margin-top: 1.5rem;
+            padding: 0.7rem 2rem;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🚫</div>
+        <h1>No Deletion Allowed!</h1>
+        <p>This page is protected.<br>
+        Deletion is strictly forbidden.<br>
+        Please enjoy the safety of your data!</p>
+        <button class="btn" disabled>Delete</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple File Upload - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .upload-zone {
+            border: 3px dashed #ddd;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        .upload-zone input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .files-preview {
+            margin-top: 20px;
+            display: none;
+        }
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .file-item:last-child {
+            margin-bottom: 0;
+        }
+        .file-icon {
+            font-size: 1.5rem;
+            min-width: 30px;
+        }
+        .file-details {
+            flex: 1;
+        }
+        .file-details h4 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: #333;
+        }
+        .file-meta {
+            color: #666;
+            font-size: 12px;
+        }
+        .remove-file {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .remove-file:hover {
+            background: #c82333;
+        }
+        .summary {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+            color: #004085;
+        }
+        .status-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .upload-progress {
+            display: none;
+            margin: 20px 0;
+        }
+        .progress-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .file-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📂</div>
+                <h1>Multiple File Upload</h1>
+            </div>
+            <p class="subtitle">Upload multiple files with drag & drop and async feedback</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Upload Multiple Files via POST with JavaScript</h2>
+            <p>Test multiple file upload functionality with real-time progress and feedback</p>
+        </section>
+
+        <section style="max-width: 700px; margin: 0 auto;">
+            <form id="uploadForm" style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
+                
+                <div class="upload-zone" id="uploadZone">
+                    <div style="pointer-events: none;">
+                        <div style="font-size: 4rem; margin-bottom: 20px; color: #ccc;">📁</div>
+                        <h3 style="margin: 0 0 10px 0; color: #333;">Choose files or drag them here</h3>
+                        <p style="margin: 0; color: #666;">You can select multiple files at once</p>
+                    </div>
+                    <input type="file" id="fileInput" name="files[]" multiple>
+                </div>
+
+                <div class="files-preview" id="filesPreview">
+                    <h4 style="margin: 0 0 15px 0; color: #333;">Selected Files:</h4>
+                    <div id="filesList"></div>
+                    <div class="summary" id="summary"></div>
+                </div>
+
+                <div class="upload-progress" id="uploadProgress">
+                    <h4 style="margin: 0 0 15px 0; color: #333;">Upload Progress:</h4>
+                    <div id="progressList"></div>
+                </div>
+
+                <button type="submit" id="submitBtn" disabled style="width: 100%; padding: 15px; background: #ccc; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: not-allowed; transition: all 0.3s ease; margin-top: 30px;">
+                    Select files to upload
+                </button>
+
+                <div id="statusMessage"></div>
+                <div id="fileActions" style="display: none;">
+                    <div class="file-actions">
+                        <a href="/uploads/" class="action-btn btn-primary" target="_blank">
+                            📁 View Uploads Directory
+                        </a>
+                        <button type="button" onclick="resetForm()" class="action-btn btn-secondary">
+                            🔄 Upload More Files
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="back-navigation" style="text-align: center; margin-top: 40px;">
+            <a href="/demo/post.html" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to POST Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. Multiple file upload with async feedback.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const filesPreview = document.getElementById('filesPreview');
+        const filesList = document.getElementById('filesList');
+        const summary = document.getElementById('summary');
+        const submitBtn = document.getElementById('submitBtn');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressList = document.getElementById('progressList');
+        const statusMessage = document.getElementById('statusMessage');
+        const fileActions = document.getElementById('fileActions');
+        
+        let selectedFiles = [];
+
+        // File input change handler
+        fileInput.addEventListener('change', function() {
+            selectedFiles = Array.from(this.files);
+            updateFileDisplay();
+        });
+
+        // Drag and drop handlers
+        uploadZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length > 0) {
+                selectedFiles = Array.from(e.dataTransfer.files);
+                updateFileInput();
+                updateFileDisplay();
+            }
+        });
+
+        // Form submission with async upload
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (selectedFiles.length === 0) {
+                showStatus('Please select files to upload.', 'error');
+                return;
+            }
+            
+            // Show progress section and hide file actions
+            uploadProgress.style.display = 'block';
+            fileActions.style.display = 'none';
+            statusMessage.innerHTML = '';
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '⏳ Uploading...';
+            submitBtn.style.background = '#ccc';
+            
+            // Create progress items
+            progressList.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const progressItem = document.createElement('div');
+                progressItem.className = 'progress-item';
+                progressItem.innerHTML = `
+                    <div class="progress-header">
+                        <span>${file.name}</span>
+                        <span id="status-${index}">⏳ Pending</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-${index}"></div>
+                    </div>
+                `;
+                progressList.appendChild(progressItem);
+            });
+            
+            let successCount = 0;
+            let errorCount = 0;
+            
+            // Upload files one by one
+            for (let i = 0; i < selectedFiles.length; i++) {
+                const file = selectedFiles[i];
+                const statusEl = document.getElementById(`status-${i}`);
+                const progressEl = document.getElementById(`progress-${i}`);
+                
+                try {
+                    statusEl.textContent = '📤 Uploading...';
+                    progressEl.style.width = '50%';
+                    
+                    // Create FormData for multipart upload
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    
+                    const response = await fetch('/uploads/', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (response.ok) {
+                        statusEl.textContent = '✅ Success';
+                        progressEl.style.width = '100%';
+                        successCount++;
+                    } else {
+                        statusEl.textContent = `❌ Failed (${response.status})`;
+                        progressEl.style.width = '100%';
+                        progressEl.style.background = '#dc3545';
+                        errorCount++;
+                    }
+                    
+                } catch (error) {
+                    statusEl.textContent = '❌ Network Error';
+                    progressEl.style.width = '100%';
+                    progressEl.style.background = '#dc3545';
+                    errorCount++;
+                }
+                
+                // Small delay between uploads
+                if (i < selectedFiles.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                }
+            }
+            
+            // Show final status
+            if (errorCount === 0) {
+                showStatus(`✅ All ${successCount} files uploaded successfully!`, 'success');
+                fileActions.style.display = 'block';
+            } else if (successCount > 0) {
+                showStatus(`⚠️ ${successCount} files uploaded, ${errorCount} failed`, 'info');
+                fileActions.style.display = 'block';
+            } else {
+                showStatus(`❌ All uploads failed`, 'error');
+            }
+            
+            // Reset submit button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `📤 Upload ${selectedFiles.length} File(s)`;
+            submitBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+        });
+
+        function updateFileInput() {
+            const dt = new DataTransfer();
+            selectedFiles.forEach(file => dt.items.add(file));
+            fileInput.files = dt.files;
+        }
+
+        function updateFileDisplay() {
+            if (selectedFiles.length === 0) {
+                filesPreview.style.display = 'none';
+                uploadProgress.style.display = 'none';
+                fileActions.style.display = 'none';
+                submitBtn.disabled = true;
+                submitBtn.style.background = '#ccc';
+                submitBtn.style.cursor = 'not-allowed';
+                submitBtn.textContent = 'Select files to upload';
+                return;
+            }
+
+            filesPreview.style.display = 'block';
+            uploadProgress.style.display = 'none';
+            
+            let totalSize = 0;
+            let filesHtml = '';
+
+            selectedFiles.forEach((file, index) => {
+                totalSize += file.size;
+                filesHtml += `
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-details">
+                            <h4>${file.name}</h4>
+                            <div class="file-meta">
+                                ${(file.size / 1024).toFixed(2)} KB • ${file.type || 'Unknown type'}
+                            </div>
+                        </div>
+                        <button type="button" class="remove-file" onclick="removeFile(${index})">Remove</button>
+                    </div>
+                `;
+            });
+
+            filesList.innerHTML = filesHtml;
+            summary.innerHTML = `
+                <strong>Total:</strong> ${selectedFiles.length} file(s) • ${(totalSize / 1024).toFixed(2)} KB
+            `;
+
+            submitBtn.disabled = false;
+            submitBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            submitBtn.style.cursor = 'pointer';
+            submitBtn.textContent = `📤 Upload ${selectedFiles.length} File(s)`;
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileInput();
+            updateFileDisplay();
+        }
+
+        function showStatus(message, type) {
+            statusMessage.innerHTML = `<div class="status-message status-${type}">${message}</div>`;
+        }
+        
+        function resetForm() {
+            selectedFiles = [];
+            fileInput.value = '';
+            updateFileDisplay();
+            statusMessage.innerHTML = '';
+            uploadProgress.style.display = 'none';
+            fileActions.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    color: #2a2a8c;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+/* Image Styling */
+img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+/* Centering and adding space between content */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme styles */
+        .dark-theme {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .container {
+            background: rgba(44, 62, 80, 0.9);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .dark-theme h1 {
+            color: #3498db;
+            text-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .dark-theme p {
+            color: #bdc3c7;
+        }
+        
+        .dark-theme img {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Enhanced container styles */
+        .container {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Image enhancements */
+        img {
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Smooth transitions for all elements */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELETE Request Demo - Webserv</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🗑️</div>
+                <h1>DELETE Request Demo</h1>
+            </div>
+            <p class="subtitle">Learn how to make HTTP DELETE requests</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>How to Test DELETE Requests</h2>
+            <p>Learn different ways to send DELETE requests to your webserver</p>
+        </section>
+
+        <section class="demo-list">
+            <div class="demo-list-item" style="pointer-events: none;">
+                <div class="list-item-icon">💻</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Using curl command
+                        <span class="list-item-badge delete">CURL</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Use curl from the terminal to send DELETE requests to your server.
+                    </p>
+                    <code class="list-item-url">curl -X DELETE http://127.0.0.1:3000/uploads/filename.txt</code>
+                </div>
+            </div>
+
+            <div class="demo-list-item" style="pointer-events: none;">
+                <div class="list-item-icon">🌐</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Using JavaScript fetch()
+                        <span class="list-item-badge special">JS</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Use JavaScript in the browser console to send DELETE requests.
+                    </p>
+                    <code class="list-item-url">fetch('/uploads/filename.txt', { method: 'DELETE' })</code>
+                </div>
+            </div>
+
+            <div class="demo-list-item" style="pointer-events: none;">
+                <div class="list-item-icon">🛠️</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Using Postman/Insomnia
+                        <span class="list-item-badge cgi">API</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Use API testing tools like Postman to send DELETE requests with full control.
+                    </p>
+                    <code class="list-item-url">DELETE http://127.0.0.1:3000/uploads/filename.txt</code>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h3>DELETE Request Examples</h3>
+            <div style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); margin: 20px 0;">
+                <h4 style="color: #333; margin-bottom: 20px;">Command Line Examples:</h4>
+                <div style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; font-family: monospace; margin-bottom: 15px;">
+                    <div style="margin-bottom: 10px;"># Delete a specific file</div>
+                    <div style="color: #68d391;">curl -X DELETE http://127.0.0.1:3000/uploads/myfile.txt</div>
+                </div>
+                
+                <div style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; font-family: monospace; margin-bottom: 15px;">
+                    <div style="margin-bottom: 10px;"># Delete with verbose output</div>
+                    <div style="color: #68d391;">curl -X DELETE -v http://127.0.0.1:3000/uploads/test.txt</div>
+                </div>
+
+                <h4 style="color: #333; margin: 30px 0 20px 0;">Browser Console Example:</h4>
+                <div style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; font-family: monospace;">
+                    <div style="color: #68d391;">fetch('/uploads/filename.txt', {</div>
+                    <div style="color: #68d391; margin-left: 20px;">method: 'DELETE'</div>
+                    <div style="color: #68d391;">}).then(response => console.log(response.status));</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="back-navigation" style="text-align: center;">
+            <a href="/" class="back-button">
+                <span class="back-button-icon">⬅️</span>
+                <span>Back to Main Demo</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Webserv Project. DELETE request instructions.</p>
+            <div class="footer-links">
+                <a href="/">Main Demo</a>
+                <a href="/uploads/">View Uploads</a>
+                <a href="/form/">Upload Files</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
