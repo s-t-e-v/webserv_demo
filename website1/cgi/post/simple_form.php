@@ -28,7 +28,7 @@ if ($isPost) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $isPost ? 'Form Submitted Successfully' : 'Form POST Demo'; ?> - Webserv</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .form-theme {
@@ -322,7 +322,7 @@ if ($isPost) {
             </div>
 
             <section class="back-navigation" style="text-align: center;">
-                <a href="/demo/post.html" class="back-button" style="background: rgba(255, 255, 255, 0.9);">
+                <a href="/demo/cgi.html" class="back-button" style="background: rgba(255, 255, 255, 0.9);">
                     <span class="back-button-icon">⬅️</span>
                     <span>Back to POST Demo</span>
                 </a>
@@ -335,7 +335,7 @@ if ($isPost) {
             <p>&copy; 2025 Webserv Project. <?php echo $isPost ? 'Form processed by PHP CGI.' : 'Form POST demonstration.'; ?></p>
             <div class="footer-links">
                 <a href="/">Main Demo</a>
-                <a href="/demo/post.html">POST Tests</a>
+                <a href="/demo/cgi.html">POST Tests</a>
             </div>
         </div>
     </footer>

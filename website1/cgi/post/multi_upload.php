@@ -250,7 +250,7 @@ if ($isPost) {
     </div>
 
     <section class="back-navigation" style="text-align: center;">
-      <a href="/demo/post.html" class="back-button" style="background: rgba(255, 255, 255, 0.9);">
+      <a href="/demo/cgi.html" class="back-button" style="background: rgba(255, 255, 255, 0.9);">
         <span class="back-button-icon">⬅️</span>
         <span>Back to POST Demo</span>
       </a>
@@ -265,7 +265,7 @@ if ($isPost) {
       <p>&copy; 2025 Webserv Project. <?= $isPost ? 'Files processed by PHP CGI.' : 'Multi-file upload demonstration.' ?></p>
       <div class="footer-links">
         <a href="/">Main Demo</a>
-        <a href="/demo/post.html">POST Tests</a>
+        <a href="/demo/cgi.html">POST Tests</a>
         <a href="/uploads/">View Uploads</a>
       </div>
     </div>
