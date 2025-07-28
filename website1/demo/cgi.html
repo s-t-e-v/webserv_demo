@@ -231,6 +231,72 @@
             </div>
         </div>
 
+        <!-- Error Testing Section -->
+        <div class="section-header">
+            <h3 class="section-title">
+                <span>💥</span>
+                Error Testing
+            </h3>
+        </div>
+
+        <section class="demo-list">
+            <a href="/cgi/broken/php_infinite_loop.php" class="demo-list-item">
+                <div class="list-item-icon">🔄</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        PHP Infinite Loop
+                        <span class="list-item-badge" style="background: rgba(220, 53, 69, 0.1); color: #721c24;">TIMEOUT</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Tests server timeout handling with a PHP script that enters an infinite loop. Should trigger a timeout error.
+                    </p>
+                    <code class="list-item-url">GET /cgi/broken/php_infinite_loop.php</code>
+                </div>
+            </a>
+
+            <a href="/cgi/broken/python_infinite_loop.py" class="demo-list-item">
+                <div class="list-item-icon">🐍</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Python Infinite Loop
+                        <span class="list-item-badge" style="background: rgba(220, 53, 69, 0.1); color: #721c24;">TIMEOUT</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Tests server timeout handling with a Python script that enters an infinite loop. Should trigger a timeout error.
+                    </p>
+                    <code class="list-item-url">GET /cgi/broken/python_infinite_loop.py</code>
+                </div>
+            </a>
+
+            <a href="/cgi/broken/php_crash.php" class="demo-list-item">
+                <div class="list-item-icon">💥</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        PHP Crash Test
+                        <span class="list-item-badge" style="background: rgba(108, 117, 125, 0.1); color: #495057;">ERROR</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Tests server error handling with a PHP script that crashes before sending proper HTTP headers.
+                    </p>
+                    <code class="list-item-url">GET /cgi/broken/php_crash.php</code>
+                </div>
+            </a>
+
+            <a href="/cgi/broken/python_crash.py" class="demo-list-item">
+                <div class="list-item-icon">⚠️</div>
+                <div class="list-item-content">
+                    <h3 class="list-item-title">
+                        Python Crash Test
+                        <span class="list-item-badge" style="background: rgba(108, 117, 125, 0.1); color: #495057;">ERROR</span>
+                    </h3>
+                    <p class="list-item-description">
+                        Tests server error handling with a Python script that crashes before sending proper HTTP headers.
+                    </p>
+                    <code class="list-item-url">GET /cgi/broken/python_crash.py</code>
+                </div>
+            </a>
+        </section>
+
         <section class="features">
             <h3>CGI Features</h3>
             <div class="feature-list">
@@ -257,6 +323,14 @@
                 <div class="feature-item">
                     <span class="feature-icon">📊</span>
                     <span>Environment Variables</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⏱️</span>
+                    <span>Timeout Handling</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💥</span>
+                    <span>Error Recovery</span>
                 </div>
             </div>
         </section>
